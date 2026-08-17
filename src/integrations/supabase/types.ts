@@ -14,7 +14,198 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      emails: {
+        Row: {
+          body: string
+          call_to_action: string
+          context: string
+          created_at: string
+          id: string
+          length: string
+          purpose: string
+          recipient: string
+          subject: string
+          tone: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          body?: string
+          call_to_action?: string
+          context?: string
+          created_at?: string
+          id?: string
+          length?: string
+          purpose?: string
+          recipient?: string
+          subject?: string
+          tone?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          body?: string
+          call_to_action?: string
+          context?: string
+          created_at?: string
+          id?: string
+          length?: string
+          purpose?: string
+          recipient?: string
+          subject?: string
+          tone?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      meetings: {
+        Row: {
+          action_items: Json
+          created_at: string
+          decisions: Json
+          id: string
+          key_points: Json
+          meeting_date: string | null
+          next_steps: Json
+          open_questions: Json
+          participants: string
+          summary: string
+          title: string
+          transcript: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          action_items?: Json
+          created_at?: string
+          decisions?: Json
+          id?: string
+          key_points?: Json
+          meeting_date?: string | null
+          next_steps?: Json
+          open_questions?: Json
+          participants?: string
+          summary?: string
+          title?: string
+          transcript?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          action_items?: Json
+          created_at?: string
+          decisions?: Json
+          id?: string
+          key_points?: Json
+          meeting_date?: string | null
+          next_steps?: Json
+          open_questions?: Json
+          participants?: string
+          summary?: string
+          title?: string
+          transcript?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          company: string
+          created_at: string
+          default_depth: string
+          default_length: string
+          default_tone: string
+          full_name: string
+          id: string
+          job_title: string
+          language: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          company?: string
+          created_at?: string
+          default_depth?: string
+          default_length?: string
+          default_tone?: string
+          full_name?: string
+          id: string
+          job_title?: string
+          language?: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          company?: string
+          created_at?: string
+          default_depth?: string
+          default_length?: string
+          default_tone?: string
+          full_name?: string
+          id?: string
+          job_title?: string
+          language?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      research: {
+        Row: {
+          analysis: string
+          benefits: Json
+          created_at: string
+          depth: string
+          findings: Json
+          format: string
+          id: string
+          messages: Json
+          question: string
+          recommendations: Json
+          risks: Json
+          sources: Json
+          summary: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          analysis?: string
+          benefits?: Json
+          created_at?: string
+          depth?: string
+          findings?: Json
+          format?: string
+          id?: string
+          messages?: Json
+          question?: string
+          recommendations?: Json
+          risks?: Json
+          sources?: Json
+          summary?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          analysis?: string
+          benefits?: Json
+          created_at?: string
+          depth?: string
+          findings?: Json
+          format?: string
+          id?: string
+          messages?: Json
+          question?: string
+          recommendations?: Json
+          risks?: Json
+          sources?: Json
+          summary?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
