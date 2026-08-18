@@ -57,7 +57,10 @@ function AuthPage() {
       password: String(form.get("password")),
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     navigate({ to: safePath(redirect) });
   };
 
@@ -66,9 +69,13 @@ function AuthPage() {
     const form = new FormData(e.currentTarget);
     const password = String(form.get("password"));
     if (password !== String(form.get("confirm"))) {
-      return toast.error("Passwords do not match.");
+      toast.error("Passwords do not match.");
+      return;
     }
-    if (password.length < 8) return toast.error("Password must be at least 8 characters.");
+    if (password.length < 8) {
+      toast.error("Password must be at least 8 characters.");
+      return;
+    }
     setBusy(true);
     const { error } = await supabase.auth.signUp({
       email: String(form.get("email")),
@@ -79,17 +86,26 @@ function AuthPage() {
       },
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     toast.success("Account created. You're all set!");
     navigate({ to: safePath(redirect) });
   };
 
   const handleReset = async (email: string) => {
-    if (!email) return toast.error("Enter your email address first.");
+    if (!email) {
+      toast.error("Enter your email address first.");
+      return;
+    }
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/auth`,
     });
-    if (error) return toast.error(error.message);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     toast.success("Password reset email sent.");
   };
 

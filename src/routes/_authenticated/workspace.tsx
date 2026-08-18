@@ -130,15 +130,27 @@ function WorkspacePage() {
 
   const saveMutation = useMutation({
     mutationFn: async () => {
-      if (!selected) return;
-      const patch =
-        selected.table === "emails"
-          ? { subject: editTitle, body: editContent }
-          : selected.table === "meetings"
-            ? { title: editTitle, summary: editContent }
-            : { question: editTitle, summary: editContent };
-      const { error } = await supabase.from(selected.table).update(patch).eq("id", selected.id);
-      if (error) throw error;
+      if (!selected) throw new Error("No document selected.");
+      const { id, table } = selected;
+      if (table === "emails") {
+        const { error } = await supabase
+          .from("emails")
+          .update({ subject: editTitle, body: editContent })
+          .eq("id", id);
+        if (error) throw error;
+      } else if (table === "meetings") {
+        const { error } = await supabase
+          .from("meetings")
+          .update({ title: editTitle, summary: editContent })
+          .eq("id", id);
+        if (error) throw error;
+      } else if (table === "research") {
+        const { error } = await supabase
+          .from("research")
+          .update({ question: editTitle, summary: editContent })
+          .eq("id", id);
+        if (error) throw error;
+      }
     },
     onSuccess: () => {
       toast.success("Document updated.");
