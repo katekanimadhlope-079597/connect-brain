@@ -69,9 +69,13 @@ function AuthPage() {
     const form = new FormData(e.currentTarget);
     const password = String(form.get("password"));
     if (password !== String(form.get("confirm"))) {
-      return toast.error("Passwords do not match.");
+      toast.error("Passwords do not match.");
+      return;
     }
-    if (password.length < 8) return toast.error("Password must be at least 8 characters.");
+    if (password.length < 8) {
+      toast.error("Password must be at least 8 characters.");
+      return;
+    }
     setBusy(true);
     const { error } = await supabase.auth.signUp({
       email: String(form.get("email")),
@@ -82,7 +86,10 @@ function AuthPage() {
       },
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     toast.success("Account created. You're all set!");
     navigate({ to: safePath(redirect) });
   };
